@@ -9,8 +9,11 @@ public class ArrayListPractice {
 
         arr.add(5);
         arr.add(44);
-        arr.add(1,4);
-        System.out.println(arr.get(1));
+        arr.add(4);
+        arr.add(3);
+        arr.set(0,888);
+
+        System.out.println(arr.get(4));
 
     }
 }
