@@ -25,12 +25,22 @@ public class LinkedListUse {
 
     public static void printLinkedList(Node<Integer> head) {
 
-        while(head != null) {
-            System.out.print(head.data + " ");
-            head = head.next;
+        Node<Integer> temp = head;
+
+        while(temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
 
         }
+        System.out.println();
+        temp = head;
 
+        while(temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+
+        }
+        System.out.println();
 //        System.out.println("head =" + head.data +  " " + head.next);
 //        System.out.println("n2 =" + head.next.data +  " " + head.next.next);
 //        System.out.println("n3 =" + head.next.next.data +  " " + head.next.next.next);
@@ -43,6 +53,7 @@ public class LinkedListUse {
 
         Node <Integer> head = createLinkedList();
 //        System.out.println(head.data +  " " + head.next);
+        printLinkedList(head);
         printLinkedList(head);
     }
 }
