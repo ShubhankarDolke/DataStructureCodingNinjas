@@ -12,23 +12,29 @@ public class LinkedListUse {
         n2.next = n3;
         n3.next = n4;
 
-
-        System.out.println("n1" + "Data = " +n1.data +  " next = " + n1.next);
-
-        System.out.println("n2" + "Data = " +n2.data +  " next = " + n2.next);
-
-        System.out.println("n3" + "Data = " +n3.data +  " next = " + n3.next);
-
-        System.out.println("n4" + "Data = " +n4.data +  " next = " + n4.next);
+//
+//        System.out.println("n1" + "Data = " +n1.data +  " next = " + n1.next);
+//
+//        System.out.println("n2" + "Data = " +n2.data +  " next = " + n2.next);
+//
+//        System.out.println("n3" + "Data = " +n3.data +  " next = " + n3.next);
+//
+//        System.out.println("n4" + "Data = " +n4.data +  " next = " + n4.next);
         return n1;
     }
 
     public static void printLinkedList(Node<Integer> head) {
 
-        System.out.println("head =" + head.data +  " " + head.next);
-        System.out.println("n2 =" + head.next.data +  " " + head.next.next);
-        System.out.println("n3 =" + head.next.next.data +  " " + head.next.next.next);
-        System.out.println("n4 =" + head.next.next.next.data +  " " + head.next.next.next.next);
+        while(head != null) {
+            System.out.print(head.data + " ");
+            head = head.next;
+
+        }
+
+//        System.out.println("head =" + head.data +  " " + head.next);
+//        System.out.println("n2 =" + head.next.data +  " " + head.next.next);
+//        System.out.println("n3 =" + head.next.next.data +  " " + head.next.next.next);
+//        System.out.println("n4 =" + head.next.next.next.data +  " " + head.next.next.next.next);
 
 
     }
@@ -36,7 +42,7 @@ public class LinkedListUse {
 
 
         Node <Integer> head = createLinkedList();
-        System.out.println(head.data +  " " + head.next);
+//        System.out.println(head.data +  " " + head.next);
         printLinkedList(head);
     }
 }
