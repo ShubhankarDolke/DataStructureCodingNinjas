@@ -1,11 +1,13 @@
 
 package LinkedListPackage;
+
 import java.util.*;
+
 public class LinkedListUse {
 
     public static Node<Integer> createLinkedList() {
-        Node <Integer> n1= new Node<>(10);
-        Node<Integer> n2= new Node<>(20);
+        Node<Integer> n1 = new Node<>(10);
+        Node<Integer> n2 = new Node<>(20);
         Node<Integer> n3 = new Node<>(30);
         Node<Integer> n4 = new Node<>(40);
 
@@ -28,7 +30,7 @@ public class LinkedListUse {
 
         Node<Integer> temp = head;
 
-        while(temp != null) {
+        while (temp != null) {
             System.out.print(temp.data + " ");
             temp = temp.next;
 
@@ -57,16 +59,16 @@ public class LinkedListUse {
         int data = sc.nextInt();
         Node<Integer> head = null;
 
-        while(data != -1) {
+        while (data != -1) {
 
             Node<Integer> currentNode = new Node<>(data);
 
-            if(head == null) {
+            if (head == null) {
                 head = currentNode;
 
-            }else{
+            } else {
                 Node<Integer> tail = head;
-                while(tail.next != null) {
+                while (tail.next != null) {
                     tail = tail.next;
 
                 }
@@ -84,9 +86,9 @@ public class LinkedListUse {
     public static void main(String[] args) {
 
 
-       Node <Integer> head = takeInput();
+        Node<Integer> head = takeInput();
 
-       //createLinkedList();
+        //createLinkedList();
 //        System.out.println(head.data +  " " + head.next);
 //        printLinkedList(head);
         printLinkedList(head);

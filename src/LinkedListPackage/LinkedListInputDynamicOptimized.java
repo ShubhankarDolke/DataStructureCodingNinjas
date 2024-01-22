@@ -1,26 +1,24 @@
-//O(n2)
+//O(n)
 package LinkedListPackage;
 
 import java.util.*;
 
+public class LinkedListInputDynamicOptimized {
 
-public class LinkedListIInputDynamic {
-
-
-    public static Node<Integer> takeInput() {
+    public static Node<Integer> takeInputOpti() {
         Node<Integer> head = null;
         Scanner sc = new Scanner(System.in);
         int data = sc.nextInt();
+        Node<Integer> tail = null;
         while (data != -1) {
             Node<Integer> currentNode = new Node<>(data);
             if (head == null) {
                 head = currentNode;
+                tail = currentNode;
+
             } else {
-                Node<Integer> tail = head;
-                while (tail.next != null) {
-                    tail = tail.next;
-                }
                 tail.next = currentNode;
+                tail = tail.next;
             }
             data = sc.nextInt();
         }
@@ -28,24 +26,12 @@ public class LinkedListIInputDynamic {
 
     }
 
-    public static void printLL(Node<Integer> head) {
-        Node<Integer> temp = head;
-        while (temp != null) {
-            System.out.println(temp.data);
-            temp = temp.next;
-        }
-
-    }
 
     public static void main(String[] args) {
-        Node<Integer> head = takeInput();
-        printLL(head);
-
+        Node<Integer> head = takeInputOpti();
+        LinkedListIInputDynamic.printLL(head);
 
     }
 
 
 }
-
-
-
