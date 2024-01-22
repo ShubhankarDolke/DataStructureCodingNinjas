@@ -1,5 +1,6 @@
-package LinkedListPackage;
 
+package LinkedListPackage;
+import java.util.*;
 public class LinkedListUse {
 
     public static Node<Integer> createLinkedList() {
@@ -33,14 +34,14 @@ public class LinkedListUse {
 
         }
         System.out.println();
-        temp = head;
-
-        while(temp != null) {
-            System.out.print(temp.data + " ");
-            temp = temp.next;
-
-        }
-        System.out.println();
+//        temp = head;
+//
+//        while(temp != null) {
+//            System.out.print(temp.data + " ");
+//            temp = temp.next;
+//
+//        }
+//        System.out.println();
 //        System.out.println("head =" + head.data +  " " + head.next);
 //        System.out.println("n2 =" + head.next.data +  " " + head.next.next);
 //        System.out.println("n3 =" + head.next.next.data +  " " + head.next.next.next);
@@ -48,12 +49,46 @@ public class LinkedListUse {
 
 
     }
+
+
+    public static Node<Integer> takeInput() {
+
+        Scanner sc = new Scanner(System.in);
+        int data = sc.nextInt();
+        Node<Integer> head = null;
+
+        while(data != -1) {
+
+            Node<Integer> currentNode = new Node<>(data);
+
+            if(head == null) {
+                head = currentNode;
+
+            }else{
+                Node<Integer> tail = head;
+                while(tail.next != null) {
+                    tail = tail.next;
+
+                }
+                tail.next = currentNode;
+
+            }
+            data = sc.nextInt();
+
+        }
+
+
+        return head;
+    }
+
     public static void main(String[] args) {
 
 
-        Node <Integer> head = createLinkedList();
+       Node <Integer> head = takeInput();
+
+       //createLinkedList();
 //        System.out.println(head.data +  " " + head.next);
-        printLinkedList(head);
+//        printLinkedList(head);
         printLinkedList(head);
     }
 }
