@@ -9,7 +9,7 @@ public class QueueUsingArray {
     private int size;
 
     public QueueUsingArray() {
-        data = new int[10];
+        data = new int[2];
         front = -1;
         rear = -1;
 
@@ -42,41 +42,70 @@ public class QueueUsingArray {
     }
 
     void enqueue(int element) {
-
-        if (front == -1) {
-            data[0] = element;
-            front = 0;
-            rear = 0;
-
+        if (size == data.length) {
+            doubleCapacity();
 
         }
+
+        if (size == 0) {
+            front = 0;
+        }
+//        rear++;
+//        if(rear == data.length) {
+//            rear = 0;
+//        }
+        rear = (rear + 1) % data.length;
         data[rear] = element;
-        rear++;
         size++;
 
 
     }
 
-    int dequeue() {
+    private void doubleCapacity() {
 
-        if (size == 0) {
-            System.out.print("Empty Queue");
-            return -1;
+        int temp [] = data;
+        data = new int [temp.length * 2];
+
+        int index = 0;
+
+        for (int i = front; i < temp.length; i++) {
+            data[index++] = temp[i];
+
         }
 
-        int temp = data[front];
+        for (int i = 0; i < front; i++) {
+            data[index++] = temp[i];
 
-        front++;
+        }
+        front = 0;
+        rear = temp.length - 1;
+    }
+
+    int dequeue() {
+        int temp = data[front];
+//        front++;
+//        if(front == data.length) {
+//            front = 0;
+//        }
+        front = (front + 1) % data.length;
         size--;
 
+        if (size == 0) {
+//            System.out.print("Empty Queue");
+            front = -1;
+            rear = -1;
+//            return -1;
+        }
         return temp;
 
 
+
+
     }
 
-    int print(int index) {
-        return data[index];
-    }
+//    int print(int index) {
+//        return data[index];
+//    }
 
 
 }
