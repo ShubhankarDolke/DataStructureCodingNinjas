@@ -1,28 +1,55 @@
 package BinaryTreesPackage;
 
+import java.util.Scanner;
+
 public class BinaryTreeUse {
 
 
     public static void main(String[] args) {
 
-        BinaryTreeNode <Integer> root = new BinaryTreeNode<>(1);
-
-        BinaryTreeNode <Integer> Rootleft = new BinaryTreeNode<>(2);
-
-        BinaryTreeNode <Integer> RootRight = new BinaryTreeNode<>(3);
-
-        root.left = Rootleft;
-        root.right = RootRight;
-
-        BinaryTreeNode <Integer> TwosRight = new BinaryTreeNode<>(4);
-
-        BinaryTreeNode <Integer> ThreesLeft = new BinaryTreeNode<>(5);
-
-        Rootleft.right = TwosRight;
-        RootRight.left = ThreesLeft;
+//        BinaryTreeNode <Integer> root = new BinaryTreeNode<>(1);
+//
+//        BinaryTreeNode <Integer> Rootleft = new BinaryTreeNode<>(2);
+//
+//        BinaryTreeNode <Integer> RootRight = new BinaryTreeNode<>(3);
+//
+//        root.left = Rootleft;
+//        root.right = RootRight;
+//
+//        BinaryTreeNode <Integer> TwosRight = new BinaryTreeNode<>(4);
+//
+//        BinaryTreeNode <Integer> ThreesLeft = new BinaryTreeNode<>(5);
+//
+//        Rootleft.right = TwosRight;
+//        RootRight.left = ThreesLeft;
 
 //        printTree(root);
+        BinaryTreeNode <Integer> root = treeTakeInput();
         printTreeDetailed(root);
+
+
+
+    }
+
+    private static BinaryTreeNode<Integer> treeTakeInput() {
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter root data");
+        int data = sc.nextInt();
+        if (data == -1) {
+            return null;
+        }
+        BinaryTreeNode <Integer> root = new BinaryTreeNode<>(data);
+
+        BinaryTreeNode <Integer> leftChild = treeTakeInput();
+        BinaryTreeNode <Integer> rightChild = treeTakeInput();
+
+        root.left = leftChild;
+        root.right = rightChild;
+
+        return root;
+
+
 
 
 
