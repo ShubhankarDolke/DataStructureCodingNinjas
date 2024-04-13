@@ -1,5 +1,7 @@
 package BinaryTreesPackage;
 
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Scanner;
 
 public class BinaryTreeUse {
@@ -24,14 +26,151 @@ public class BinaryTreeUse {
 //        RootRight.left = ThreesLeft;
 
 //        printTree(root);
-        BinaryTreeNode <Integer> root = treeTakeInput();
-        printTreeDetailed(root);
+//        BinaryTreeNode <Integer> root = treeTakeInput();
+//        BinaryTreeNode <Integer> root = treeTakeInputBetter(true, 0, true);
+          BinaryTreeNode <Integer> root = BinaryTreeLevelWise();
+//        System.out.println(treeCountNode(root));
+//        printTreeDetailed(root);
+        printTreeDetailedLevelWise(root);
+
 
 
 
     }
 
-    private static BinaryTreeNode<Integer> treeTakeInput() {
+    private static void printTreeDetailedLevelWise(BinaryTreeNode<Integer> root) {
+
+        if(root == null) {
+            return;
+        }
+
+        Queue<BinaryTreeNode<Integer>> childToPrint = new LinkedList<>();
+
+        childToPrint.add(root);
+
+
+        while(!childToPrint.isEmpty()) {
+            BinaryTreeNode<Integer> front = childToPrint.poll();
+            System.out.print(front.data+ ": ");
+            if(front.left != null) {
+                System.out.print(" L" + front.left.data );
+            }
+            if(front.right != null) {
+                System.out.print(" R" + front.right.data);
+            }
+            System.out.println();
+
+            if(front.left != null){
+                childToPrint.add(front.left);
+            }
+            if(front.right != null) {
+                childToPrint.add(front.right);
+
+            }
+
+
+        }
+    }
+
+    public static BinaryTreeNode<Integer> BinaryTreeLevelWise() {
+        /*
+
+1: take root input
+2: take it into the Queue
+3: while queue is not empty
+4: a. take the first element out
+   b. ask for its left
+        if left is != -1
+        attached this element to its left size and push to queue
+
+    repeat for right same step b.
+
+ return root
+
+ */
+
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter Root data ");
+        int rootData = sc.nextInt();
+
+        if(rootData == -1) {
+            return null;
+        }
+        BinaryTreeNode <Integer> root = new BinaryTreeNode<>(rootData);
+
+        Queue<BinaryTreeNode<Integer>> pendingChildren = new LinkedList<BinaryTreeNode<Integer>>();
+        pendingChildren.add(root);
+        while(!pendingChildren.isEmpty()) {
+
+            BinaryTreeNode<Integer> frontNode = pendingChildren.poll();
+            System.out.println("Enter left data of " + frontNode.data);
+            int left = sc.nextInt();
+            if(left != -1) {
+                BinaryTreeNode <Integer> leftChild = new BinaryTreeNode<>(left);
+                frontNode.left = leftChild;
+                pendingChildren.add(leftChild);
+
+            }
+            System.out.println("Enter right data of " + frontNode.data);
+            int right = sc.nextInt();
+            if(right != -1) {
+                BinaryTreeNode <Integer> rightChild = new BinaryTreeNode<>(right);
+                frontNode.right = rightChild;
+                pendingChildren.add(rightChild);
+            }
+
+        }
+
+        return root;
+    }
+
+    public static int treeCountNode(BinaryTreeNode <Integer> root) {
+        if(root == null) {
+            return 0;
+        }
+
+        int leftNodeCount = treeCountNode(root.left);
+        int rightNodeCount = treeCountNode(root.right);
+
+        return 1 + leftNodeCount + rightNodeCount;
+
+    }
+
+
+
+
+    public static BinaryTreeNode<Integer> treeTakeInputBetter(boolean isRoot,int parentData, boolean isLeft ) {
+
+        if(isRoot) {
+            System.out.println("Enter Root Data");
+        }else{
+            if(isLeft) {
+                System.out.println("Enter left Child of " + parentData);
+            }else{
+                System.out.println("Enter right Child of " + parentData);
+            }
+
+        }
+
+        Scanner sc = new Scanner(System.in);
+        int rootData = sc.nextInt();
+        if(rootData == -1) {
+            return null;
+        }
+
+        BinaryTreeNode <Integer> root = new BinaryTreeNode<>(rootData);
+        BinaryTreeNode <Integer> leftChild = treeTakeInputBetter(false, rootData, true);
+        BinaryTreeNode <Integer> rightChild = treeTakeInputBetter(false, rootData, false);
+        root.left = leftChild;
+        root.right = rightChild;
+
+        return root;
+
+
+
+    }
+
+    public static BinaryTreeNode<Integer> treeTakeInput() {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter root data");
@@ -55,7 +194,7 @@ public class BinaryTreeUse {
 
     }
 
-    private static void printTreeDetailed(BinaryTreeNode<Integer> root) {
+    public static void printTreeDetailed(BinaryTreeNode<Integer> root) {
 
         if(root == null) {
             return;
@@ -76,7 +215,7 @@ public class BinaryTreeUse {
 
     }
 
-    private static void printTree(BinaryTreeNode<Integer> root) {
+    public static void printTree(BinaryTreeNode<Integer> root) {
 
         if(root == null) {
             return;
