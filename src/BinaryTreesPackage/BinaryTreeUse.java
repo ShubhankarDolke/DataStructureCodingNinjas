@@ -31,14 +31,46 @@ public class BinaryTreeUse {
           BinaryTreeNode <Integer> root = BinaryTreeLevelWise();
 //        System.out.println(treeCountNode(root));
 //        printTreeDetailed(root);
-        printTreeDetailedLevelWise(root);
+//        printTreeDetailedLevelWise(root);
+//        System.out.println(largestDataInTree(root));
 
+        System.out.println(noOfLeafInTree(root));
 
 
 
     }
 
-    private static void printTreeDetailedLevelWise(BinaryTreeNode<Integer> root) {
+    public static int noOfLeafInTree(BinaryTreeNode<Integer> root) {
+
+        if(root == null) {
+            return 0;
+        }
+        if(root.left == null && root.right == null) {
+            return 1;
+
+        }
+
+        return noOfLeafInTree(root.left) + noOfLeafInTree(root.right);
+
+
+
+    }
+
+    public static int largestDataInTree(BinaryTreeNode<Integer> root) {
+        if(root == null) {
+            return -1;
+        }
+
+        int largestLeft = largestDataInTree(root.left);
+        int largestRight = largestDataInTree(root.right);
+
+        return Math.max(root.data, Math.max(largestRight, largestLeft));
+    }
+
+
+
+
+    public static void printTreeDetailedLevelWise(BinaryTreeNode<Integer> root) {
 
         if(root == null) {
             return;
