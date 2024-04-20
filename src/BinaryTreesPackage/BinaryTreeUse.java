@@ -1,8 +1,6 @@
 package BinaryTreesPackage;
 
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.*;
 
 public class BinaryTreeUse {
 
@@ -30,14 +28,86 @@ public class BinaryTreeUse {
 //        BinaryTreeNode <Integer> root = treeTakeInputBetter(true, 0, true);
           BinaryTreeNode <Integer> root = BinaryTreeLevelWise();
 //        System.out.println(treeCountNode(root));
-//        printTreeDetailed(root);
+        printTreeDetailed(root);
 //        printTreeDetailedLevelWise(root);
 //        System.out.println(largestDataInTree(root));
 
-        System.out.println(noOfLeafInTree(root));
+//        System.out.println(noOfLeafInTree(root));
+//        int k = 2;
+//        System.out.println("Depth of node " + k);
+//        printDepthNodeAtK(root, k);
+
+//        BinaryTreeNode<Integer> newRoot = removeLeaves(root);
+//        printTreeDetailed(newRoot);
+
+        System.out.println("Is tree Balanced? " + isTreeBalanced(root));
 
 
 
+
+
+
+
+
+    }
+    public static int heightOfTree(BinaryTreeNode<Integer> root) {
+        if(root == null) {
+            return 0;
+        }
+
+        int leftHeight = heightOfTree(root.left);
+        int rightHeight = heightOfTree(root.right);
+
+        return 1 + Math.max(leftHeight, rightHeight);
+
+    }
+
+    public static boolean isTreeBalanced(BinaryTreeNode<Integer> root) {
+        if(root == null) {
+            return true;
+        }
+
+        int leftHeight = heightOfTree(root.left);
+        int rightHeight = heightOfTree(root.right);
+
+        if(Math.abs(leftHeight - rightHeight ) > 1) {
+            return false;
+        }
+
+        boolean isLeftBalanced = isTreeBalanced(root.left);
+        boolean isRightBalanced = isTreeBalanced(root.right);
+
+        return isLeftBalanced && isRightBalanced;
+    }
+
+    public static BinaryTreeNode<Integer> removeLeaves(BinaryTreeNode<Integer> root) {
+        if(root == null) {
+            return null;
+        }
+
+        if(root.left == null && root.right == null) {
+            return null;
+        }
+
+        root.left = removeLeaves(root.left);
+        root.right = removeLeaves(root.right);
+
+        return root;
+    }
+
+
+    public static void printDepthNodeAtK(BinaryTreeNode<Integer> root, int k) {
+
+        if(root == null) {
+            return;
+        }
+
+        if(k == 0) {
+            System.out.print(root.data + " ");
+        }
+
+        printDepthNodeAtK(root.left, k -1);
+        printDepthNodeAtK(root.right, k - 1);
     }
 
     public static int noOfLeafInTree(BinaryTreeNode<Integer> root) {
