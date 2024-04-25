@@ -26,9 +26,9 @@ public class BinaryTreeUse {
 //        printTree(root);
 //        BinaryTreeNode <Integer> root = treeTakeInput();
 //        BinaryTreeNode <Integer> root = treeTakeInputBetter(true, 0, true);
-          BinaryTreeNode <Integer> root = BinaryTreeLevelWise();
+//          BinaryTreeNode <Integer> root = BinaryTreeLevelWise();
 //        System.out.println(treeCountNode(root));
-        printTreeDetailed(root);
+//        printTreeDetailed(root);
 //        printTreeDetailedLevelWise(root);
 //        System.out.println(largestDataInTree(root));
 
@@ -40,15 +40,98 @@ public class BinaryTreeUse {
 //        BinaryTreeNode<Integer> newRoot = removeLeaves(root);
 //        printTreeDetailed(newRoot);
 
-        System.out.println("Is tree Balanced? " + isTreeBalanced(root));
+//        System.out.println("Is tree Balanced? " + isTrssBalancedBetter(root).isBalanced);
+
+        int [] in = {4, 2, 5, 1, 3};
+        int [] pre = {1, 2, 4, 5, 3};
+        BinaryTreeNode<Integer> root = buildTreePreIn(pre, in);
+        printTreeDetailed(root);
+
+    }
 
 
 
+    public static BinaryTreeNode<Integer> buildTreePreInHelper(int [] pre, int [] in, int siPre,int eiPre,int siIn,int eiIn) {
+
+        if(siPre > eiPre) {
+            return null;
+        }
+
+        int rootData = pre[siPre];
+
+        BinaryTreeNode<Integer> root = new BinaryTreeNode<>(rootData);
+
+        int rootIndex = -1;
+
+        for(int i =  siIn; i <= eiIn; i++) {
+            if(rootData == in[i]) {
+                rootIndex = i;
+                break;
+            }
+
+        }
+
+        int siPreLeft = siPre + 1 ;
+        int siInLeft= siIn;
+
+        int eiInLeft = rootIndex - 1;
+
+        int siInRight = rootIndex + 1;
+        int eiPreRight = eiPre;
+        int eiInRight = eiIn;
+
+        int leftSubTree = eiInLeft - siInLeft + 1;
+
+        int eiPreLeft =  siPreLeft + leftSubTree - 1 ;
+        int siPreRight = eiPreLeft + 1;
 
 
+        BinaryTreeNode<Integer> left = buildTreePreInHelper(pre, in , siPreLeft, eiPreLeft, siInLeft, eiInLeft);
+        BinaryTreeNode<Integer> right = buildTreePreInHelper(pre, in , siPreRight, eiPreRight, siInRight, eiInRight);
 
+        root.left = left;
+        root.right = right;
 
+        return root;
 
+    }
+    public static BinaryTreeNode<Integer> buildTreePreIn(int [] pre, int [] in) {
+
+        return buildTreePreInHelper(pre, in, 0, pre.length- 1, 0, in.length- 1);
+
+    }
+
+    public static BalancedTreeReturn isTreeBalancedBetter(BinaryTreeNode<Integer> root) {
+
+       if(root == null) {
+
+           int height = 0;
+           boolean isBal = true;
+           BalancedTreeReturn ans = new BalancedTreeReturn();
+           ans.height = height;
+           ans.isBalanced = isBal;
+           return ans;
+       }
+
+       BalancedTreeReturn leftBalanced = isTreeBalancedBetter(root.left);
+       BalancedTreeReturn rightBalanced = isTreeBalancedBetter(root.right);
+       boolean isBal = true;
+       int height = 1 + Math.max(leftBalanced.height, rightBalanced.height);
+
+       if(Math.abs(leftBalanced.height - rightBalanced.height ) > 1) {
+           isBal = false;
+       }
+
+       if(!leftBalanced.isBalanced || !rightBalanced.isBalanced) {
+           isBal = false;
+       }
+
+       BalancedTreeReturn ans = new BalancedTreeReturn();
+
+       ans.height = height;
+       ans.isBalanced = isBal;
+
+       return ans;
     }
     public static int heightOfTree(BinaryTreeNode<Integer> root) {
         if(root == null) {
