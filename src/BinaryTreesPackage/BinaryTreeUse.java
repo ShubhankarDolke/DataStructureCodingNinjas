@@ -50,6 +50,45 @@ public class BinaryTreeUse {
     }
 
 
+    public static isBSTReturn isBSTBetter(BinaryTreeNode<Integer> root) {
+
+        if(root == null) {
+            isBSTReturn ans = new isBSTReturn(Integer.MIN_VALUE, Integer.MIN_VALUE, true);
+
+            return ans;
+        }
+
+        isBSTReturn leftAns = isBSTBetter(root.left);
+        isBSTReturn rightAns = isBSTBetter(root.right);
+
+        int min = Math.min(root.data, Math.min(leftAns.min, rightAns.min));
+        int max = Math.max(root.data, Math.max(leftAns.max, rightAns.max));
+        boolean isBST = true;
+
+        if(leftAns.max >= root.data){
+            isBST = false;
+        }
+
+        if(rightAns.min < root.data) {
+            isBST = false;
+        }
+
+        if(!leftAns.isBST) {
+            isBST = false;
+
+        }
+
+        if(!rightAns.isBST){
+            isBST = false;
+        }
+
+        isBSTReturn ans = new isBSTReturn(min, max, isBST);
+
+        return ans;
+
+    }
+
+
 
     public static BinaryTreeNode<Integer> buildTreePreInHelper(int [] pre, int [] in, int siPre,int eiPre,int siIn,int eiIn) {
 
