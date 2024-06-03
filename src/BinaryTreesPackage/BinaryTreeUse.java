@@ -259,6 +259,17 @@ public class BinaryTreeUse {
         return Math.max(root.data, Math.max(largestRight, largestLeft));
     }
 
+    public static int smallestDataInTree(BinaryTreeNode<Integer> root) {
+        if(root == null) {
+            return -1;
+        }
+
+        int smallestLeft = smallestDataInTree(root.left);
+        int smallestRight = smallestDataInTree(root.right);
+
+        return Math.min(root.data, Math.max(smallestLeft, smallestRight));
+    }
+
 
 
 
@@ -411,11 +422,6 @@ public class BinaryTreeUse {
         root.right = rightChild;
 
         return root;
-
-
-
-
-
     }
 
     public static void printTreeDetailed(BinaryTreeNode<Integer> root) {
