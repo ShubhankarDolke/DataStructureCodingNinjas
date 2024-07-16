@@ -28,6 +28,8 @@ public class Lamports {
         }
 
         System.out.println(
+
+
                 "\nThe time stamps of events in P2:");
 
         // Print the array p2[]
